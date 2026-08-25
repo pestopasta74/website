@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Preston Whiteman portfolio
 
-## Getting Started
+A personal portfolio built with Next.js, TypeScript and Tailwind CSS.
 
-First, run the development server:
+## Run the site locally
+
+This project uses Bun. From this folder, run:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Add or update a project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All featured projects live in `src/data/projects.ts`. Each project has its own
+description, tags, status and list of links. The homepage builds the project
+cards automatically from this file.
 
-## Learn More
+Add links like this:
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+links: [
+  {
+    label: "Live demo",
+    href: "https://your-project.example.com",
+    kind: "demo",
+  },
+  {
+    label: "Source code",
+    href: "https://github.com/pestopasta74/your-project",
+    kind: "source",
+  },
+],
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Use `active` for a currently maintained project, `in-development` for work that
+is still being prepared, and `completed` for finished work.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Validate changes
 
-## Deploy on Vercel
+```bash
+bun run lint
+bun run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The production website is intended to remain connected to the existing GitHub
+repository and Vercel project when the rebuild is approved for release.
