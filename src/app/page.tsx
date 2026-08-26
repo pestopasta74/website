@@ -25,12 +25,12 @@ export default function Home() {
             <p className="kicker">Physics with Theoretical Physics · University of Bath</p>
             <h1 id="hero-title">Preston Whiteman</h1>
             <p className="hero-statement">
-              Applying mathematical reasoning and computation to complex systems, from
-              stochastic finance to research-evidence automation.
+              I turn complex systems into clear, testable tools, combining mathematical
+              modelling, computation and disciplined investigation.
             </p>
           </div>
           <div className="hero-footer">
-            <p>Interested in quantitative finance, technology, research and software engineering placements.</p>
+            <p>Physics student building evidence-led systems for quantitative finance, research and technology.</p>
             <div className="hero-actions" aria-label="Profile links">
               <a className="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
               <a className="button button-secondary" href="https://github.com/pestopasta74" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
@@ -42,8 +42,8 @@ export default function Home() {
         <section className="work-section" id="work" aria-labelledby="work-title">
           <div className="section-heading">
             <p className="section-index">01 / Selected work</p>
-            <h2 id="work-title">Ideas made testable.</h2>
-            <p>Selected work across research, quantitative modelling and interdisciplinary engineering.</p>
+            <h2 id="work-title">Work with measurable intent.</h2>
+            <p>Projects that turn uncertainty into insight, and insight into working systems.</p>
           </div>
           <div className="work-grid">
             {projects.map((project) => (
@@ -57,8 +57,13 @@ export default function Home() {
                 </ul>
                 <div className="project-links">
                   {project.links.length > 0 ? project.links.map((link) => (
-                    <a href={link.href} key={link.href} target="_blank" rel="noreferrer">
-                      {link.label} <span aria-hidden="true">↗</span>
+                    <a
+                      href={link.href}
+                      key={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    >
+                      {link.label} <span aria-hidden="true">{link.href.startsWith("http") ? "↗" : "→"}</span>
                     </a>
                   )) : <span>Online demonstration coming soon</span>}
                 </div>
@@ -71,28 +76,23 @@ export default function Home() {
           <p className="section-index">02 / About</p>
           <div className="about-layout">
             <h2 id="about-title">
-              I use physics to understand systems and computation to make those ideas
-              useful.
+              I make difficult ideas useful, measurable and ready to act on.
             </h2>
             <div className="about-copy">
               <p>
                 I&apos;m studying BSc Physics with Theoretical Physics with Professional
-                Placement at the University of Bath. The course explores the deep
-                relationship between mathematics and theoretical physics while developing
-                scientific computing, theoretical modelling and experimental skills.
+                Placement at the University of Bath, where mathematical theory meets
+                scientific computing, modelling and experimental work.
               </p>
               <p>
-                My work spans quantitative modelling, research impact analysis and
-                interdisciplinary engineering. Across each, I&apos;m drawn to the same process:
-                define the problem carefully, build something testable, examine its limits
-                and communicate the result clearly.
+                Across quantitative modelling, research impact analysis and interdisciplinary
+                engineering, I focus on the same outcome: a clearer decision, backed by a
+                system that can be tested and trusted.
               </p>
               <p>
-                Through laboratory work, scientific computing and collaborative projects,
-                I am developing a practical understanding of measurement, applied
-                statistics and the mathematical techniques used to describe physical
-                systems. I want to apply that training to problems in finance, technology
-                and research during my professional placement.
+                I bring careful measurement, applied statistics and technical communication
+                to problems in finance, technology and research. My placement goal is to
+                contribute where rigorous analysis can create practical momentum.
               </p>
               <dl className="about-facts">
                 <div><dt>Based</dt><dd>Bath, United Kingdom</dd></div>
@@ -110,11 +110,11 @@ export default function Home() {
           </div>
           <div className="spotlight-main">
             <p className="spotlight-role">Research &amp; Impact Intern · Bath Insights</p>
-            <h2 id="spotlight-title">Turning scattered evidence into structured insight.</h2>
+            <h2 id="spotlight-title">Making research impact visible.</h2>
             <p className="spotlight-intro">
-              Supporting the University&apos;s research-impact work across policy, health and
-              environmental domains. The work combines evidence synthesis with a locally run
-              automation workflow.
+              Built a focused evidence workflow for the University&apos;s research-impact work
+              across policy, health and environmental domains, making scattered signals easier
+              to find, structure and review.
             </p>
             <div className="spotlight-metrics" aria-label="Internship highlights">
               <div><strong>50+</strong><span>research outputs analysed</span></div>
@@ -130,29 +130,29 @@ export default function Home() {
         <section className="experience-section" id="experience" aria-labelledby="experience-title">
           <div className="section-heading light-heading">
             <p className="section-index">03 / Experience</p>
-            <h2 id="experience-title">Beyond the model.</h2>
-            <p>Technical curiosity supported by collaboration, communication and responsibility.</p>
+            <h2 id="experience-title">Built for the real world.</h2>
+            <p>Technical work becomes valuable when teams can understand it, use it and move forward with it.</p>
           </div>
           <div className="timeline">
             <article>
               <time>2026 to present</time>
               <div><p>University of Bath</p><h3>Smart Prosthetic Arm · Vertically Integrated Project</h3></div>
-              <p>Collaborative software, web infrastructure and technical documentation for an interdisciplinary assistive-technology team.</p>
+              <p>Building collaborative software, web infrastructure and technical documentation for an interdisciplinary assistive-technology team.</p>
             </article>
             <article>
               <time>2025 to 2026</time>
               <div><p>Team Bath Racing Electric</p><h3>Autonomous Systems</h3></div>
-              <p>Contributed to control and motion-planning work within a multidisciplinary Formula Student engineering environment.</p>
+              <p>Contributed to control and motion-planning work in a multidisciplinary Formula Student engineering environment.</p>
             </article>
             <article>
               <time>2026 to present</time>
               <div><p>University of Bath</p><h3>Student Outreach Ambassador</h3></div>
-              <p>Representing the university and communicating clearly with prospective students and families across major events.</p>
+              <p>Representing the university and making complex choices clearer for prospective students and families.</p>
             </article>
             <article>
               <time>2023 to 2024</time>
               <div><p>EDT &amp; GE Vernova</p><h3>Industrial Cadets Gold · Project Team Leader</h3></div>
-              <p>Led a year-long engineering design project from evaluation through to a formal presentation for industry stakeholders.</p>
+              <p>Led a year-long engineering design project from evaluation to a formal presentation for industry stakeholders.</p>
             </article>
           </div>
         </section>
@@ -160,7 +160,7 @@ export default function Home() {
         <section className="recognition-section" aria-labelledby="recognition-title">
           <div className="recognition-copy">
             <p className="section-index">04 / Recognition</p>
-            <h2 id="recognition-title">Evidence, not adjectives.</h2>
+            <h2 id="recognition-title">Proof of curiosity.</h2>
           </div>
           <div className="recognition-grid">
             <article><span>01</span><strong>British Physics Olympiad</strong><p>Gold Award · top approximately 5% nationally</p></article>
@@ -173,8 +173,8 @@ export default function Home() {
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <p className="section-index">05 / Contact</p>
           <div>
-            <h2 id="contact-title">Let&apos;s examine a difficult problem.</h2>
-            <p>I&apos;m exploring placement opportunities across quantitative finance, technology, research and software engineering.</p>
+            <h2 id="contact-title">Let&apos;s solve something difficult.</h2>
+            <p>I&apos;m looking for a placement where quantitative thinking, technical craft and clear communication can create useful change.</p>
             <div className="contact-links">
               <a href="https://www.linkedin.com/in/pestopasta74/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
               <a href="https://github.com/pestopasta74" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>

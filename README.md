@@ -1,50 +1,101 @@
-# Preston Whiteman portfolio
+# Preston Whiteman
 
-A personal portfolio built with Next.js, TypeScript and Tailwind CSS.
+Personal portfolio for Preston Whiteman, a Physics with Theoretical Physics
+student at the University of Bath. The site presents work across quantitative
+finance, research automation, scientific computing and interdisciplinary
+engineering.
 
-## Run the site locally
+## Overview
 
-This project uses Bun. From this folder, run:
+The portfolio is a Next.js application with a data-driven project index and
+individual case-study routes. Its visual system is intentionally typographic,
+structured and evidence-led, reflecting the work it presents.
+
+## Technology
+
+- Next.js 16 with the App Router
+- React 19 and TypeScript
+- Tailwind CSS 4 via PostCSS
+- Bun for dependency management and scripts
+- Vercel-compatible production deployment
+
+## Project structure
+
+```text
+.
+├── public/
+│   └── projects/              # Project images and other static assets
+├── src/
+│   ├── app/                   # Pages, layouts and global styles
+│   │   └── projects/
+│   │       └── monte-carlo-option-pricing/
+│   │           └── page.tsx   # Monte Carlo case study
+│   └── data/                  # Content shared by routes
+│       ├── monte-carlo.ts
+│       └── projects.ts
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+└── tsconfig.json
+```
+
+## Local development
+
+Install dependencies and start the development server from the repository root:
 
 ```bash
 bun install
 bun run dev
 ```
 
-Then open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000) in a browser. Use another
+port if an existing development server is already running:
 
-## Add or update a project
+```bash
+bun run dev -- -p 3001
+```
 
-All featured projects live in `src/data/projects.ts`. Each project has its own
-description, tags, status and list of links. The homepage builds the project
-cards automatically from this file.
+## Content updates
 
-Add links like this:
+Featured projects are defined in [src/data/projects.ts](src/data/projects.ts).
+The homepage reads this collection to render project cards, statuses, tags and
+links. Keep project-specific content in `src/data` rather than embedding it in
+page components.
+
+Project links support internal case studies and external destinations:
 
 ```ts
 links: [
   {
-    label: "Live demo",
-    href: "https://your-project.example.com",
-    kind: "demo",
+    label: "Case study",
+    href: "/projects/example",
+    kind: "case-study",
   },
   {
-    label: "Source code",
-    href: "https://github.com/pestopasta74/your-project",
+    label: "Source",
+    href: "https://github.com/your-account/example",
     kind: "source",
   },
 ],
 ```
 
-Use `active` for a currently maintained project, `in-development` for work that
-is still being prepared, and `completed` for finished work.
+Use `active` for maintained work, `in-development` for work still being built,
+and `completed` for finished projects.
 
-## Validate changes
+## Validation
+
+Run the checks before opening a pull request or deploying:
 
 ```bash
 bun run lint
 bun run build
 ```
 
-The production website is intended to remain connected to the existing GitHub
-repository and Vercel project when the rebuild is approved for release.
+The build may require network access when `next/font/google` needs to download
+font files for the first time.
+
+## Deployment
+
+The application is ready for deployment through the existing Vercel project.
+Connect the repository, use the default Next.js build settings, and deploy the
+`production` branch when the rebuild is approved.

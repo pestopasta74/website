@@ -35,7 +35,18 @@ export const projects: Project[] = [
       "An active exploration of Black-Scholes, geometric Brownian motion and Monte Carlo pricing, with automated tests and analysis of convergence and numerical error.",
     tags: ["Probability", "Monte Carlo", "Numerical methods"],
     status: "in-development",
-    links: [],
+    links: [
+      {
+        label: "Case study",
+        href: "/projects/monte-carlo-option-pricing",
+        kind: "case-study",
+      },
+      {
+        label: "Source",
+        href: "https://github.com/pestopasta74/monte-carlo-risk-engine",
+        kind: "source",
+      },
+    ],
   },
   {
     number: "03",
