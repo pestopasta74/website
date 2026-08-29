@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects } from "@/data/projects";
 
 export default function Home() {
@@ -47,11 +48,38 @@ export default function Home() {
           </div>
           <div className="work-grid">
             {projects.map((project) => (
-              <article className="project-card" key={project.number}>
+              <article className="project-card" key={project.number} data-reveal>
                 <div className="project-topline"><span>{project.number}</span><span>{project.eyebrow}</span><span className={`status status-${project.status}`}>{project.status.replace("-", " ")}</span></div>
-                <div className="project-graphic" aria-hidden="true"><span /><span /><span /><i /></div>
+                <figure className="project-image">
+                  <Image
+                    src={project.image.src}
+                    alt={project.image.alt}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 33vw"
+                    style={{ objectPosition: project.image.position }}
+                  />
+                  {project.links
+                    .filter((link) => link.kind === "case-study")
+                    .map((link) => (
+                      <a
+                        className="project-image-case-link"
+                        href={link.href}
+                        key={link.href}
+                        aria-label={`Read the ${project.title} case study`}
+                      />
+                    ))}
+                  <figcaption>
+                    <a href={project.image.creditUrl} target="_blank" rel="noreferrer">
+                      {project.image.credit}
+                    </a>
+                  </figcaption>
+                </figure>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
+                <div className="project-impact">
+                  <span>Impact</span>
+                  <p>{project.impact}</p>
+                </div>
                 <ul aria-label="Project themes">
                   {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
                 </ul>
@@ -72,7 +100,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="about-section" id="about" aria-labelledby="about-title">
+        <section className="about-section" id="about" aria-labelledby="about-title" data-reveal>
           <p className="section-index">02 / About</p>
           <div className="about-layout">
             <h2 id="about-title">
@@ -103,7 +131,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="spotlight-section" aria-labelledby="spotlight-title">
+        <section className="spotlight-section" aria-labelledby="spotlight-title" data-reveal>
           <div className="spotlight-label">
             <p className="section-index">Research spotlight / 2026</p>
             <span>University of Bath</span>
@@ -127,7 +155,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="experience-section" id="experience" aria-labelledby="experience-title">
+        <section className="experience-section" id="experience" aria-labelledby="experience-title" data-reveal>
           <div className="section-heading light-heading">
             <p className="section-index">03 / Experience</p>
             <h2 id="experience-title">Built for the real world.</h2>
@@ -157,7 +185,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="recognition-section" aria-labelledby="recognition-title">
+        <section className="recognition-section" aria-labelledby="recognition-title" data-reveal>
           <div className="recognition-copy">
             <p className="section-index">04 / Recognition</p>
             <h2 id="recognition-title">Proof of curiosity.</h2>
@@ -170,7 +198,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="contact-section" id="contact" aria-labelledby="contact-title">
+        <section className="contact-section" id="contact" aria-labelledby="contact-title" data-reveal>
           <p className="section-index">05 / Contact</p>
           <div>
             <h2 id="contact-title">Let&apos;s solve something difficult.</h2>
