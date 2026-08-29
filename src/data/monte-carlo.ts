@@ -23,3 +23,30 @@ export const results = [
         varianceReduction: "1.707x",
     },
 ] as const;
+
+export const greekConvergence = [
+    {
+        greek: "Call Delta",
+        pathsStart: "2,000",
+        pathsEnd: "600,000",
+        errorStart: "0.012819",
+        errorEnd: "0.000744",
+        reduction: "17.23x",
+    },
+    {
+        greek: "Gamma",
+        pathsStart: "2,000",
+        pathsEnd: "600,000",
+        errorStart: "0.002504",
+        errorEnd: "0.000139",
+        reduction: "18.01x",
+    },
+    {
+        greek: "Call Vega",
+        pathsStart: "2,000",
+        pathsEnd: "600,000",
+        errorStart: "1.600593",
+        errorEnd: "0.097863",
+        reduction: "16.36x",
+    },
+] as const;
