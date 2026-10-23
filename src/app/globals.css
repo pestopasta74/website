@@ -72,6 +72,7 @@ p { margin: 0 0 20px; }
 .navigation-toggle { display: none; order: 4; }
 .site-preferences { display: flex; align-items: center; gap: 5px; order: 3; }
 .theme-toggle, .preference-panel summary { display: flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; padding: 0; background: transparent; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); font-size: 22px; line-height: 1; }
+.site-preferences svg { display: block; flex-shrink: 0; }
 .preference-panel { position: relative; }
 .preference-panel summary { list-style: none; }
 .preference-panel summary::-webkit-details-marker { display: none; }
