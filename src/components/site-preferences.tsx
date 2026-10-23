@@ -1,0 +1,12 @@
+"use client";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+const subscribe = (notify: () => void) => { window.addEventListener("portfolio-preferences", notify); return () => window.removeEventListener("portfolio-preferences", notify); };
+const snapshot = () => [document.documentElement.dataset.theme || "light", document.documentElement.dataset.sound || "off", document.documentElement.dataset.motion || "full"].join("|");
+const serverSnapshot = () => "light|off|full";
+function preference(key: string, value: string) { document.documentElement.dataset[key] = value; try { localStorage.setItem(`preston-${key}`, value); } catch {} window.dispatchEvent(new Event("portfolio-preferences")); }
+export default function SitePreferences() {
+  const panel = useRef<HTMLDetailsElement>(null);
+  useEffect(() => { const outside = (event: PointerEvent) => { if (panel.current && !panel.current.contains(event.target as Node)) panel.current.open = false; }; document.addEventListener("pointerdown", outside); return () => document.removeEventListener("pointerdown", outside); }, []);
+  const [theme, sound, motion] = useSyncExternalStore(subscribe, snapshot, serverSnapshot).split("|");
+  return <div className="site-preferences"><button className="theme-toggle" aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} onClick={() => preference("theme", theme === "dark" ? "light" : "dark")}><span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span></button><details ref={panel} className="preference-panel" onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); event.currentTarget.open = false; event.currentTarget.querySelector("summary")?.focus(); } }}><summary aria-label="Display, sound and motion settings" title="Display, sound and motion settings"><span aria-hidden="true">⚙</span></summary><div className="preference-options"><strong>Display &amp; sound</strong><p>Choose the settings that suit you.</p><button aria-pressed={sound === "on"} onClick={() => preference("sound", sound === "on" ? "off" : "on")}><span>Sound effects</span><span>{sound === "on" ? "On ♪" : "Off"}</span></button><button aria-pressed={motion === "reduce"} onClick={() => preference("motion", motion === "reduce" ? "full" : "reduce")}><span>Reduce motion</span><span>{motion === "reduce" ? "On" : "Off"}</span></button><small>Sounds are off by default. Your choices stay on this device.</small></div></details></div>;
+}

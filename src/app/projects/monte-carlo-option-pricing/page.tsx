@@ -1,72 +1,83 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { benchmarkParameters, greekConvergence, results } from "@/data/monte-carlo";
 
 export const metadata: Metadata = {
-  title: "Monte Carlo Option Pricing",
+  alternates: { canonical: "/projects/monte-carlo-option-pricing" },
+  title: "Monte Carlo Option Pricing | Preston Whiteman",
   description:
     "A tested Python risk engine for European option pricing, Monte Carlo Greeks, convergence analysis and antithetic variance reduction.",
-  openGraph: {
-    title: "Monte Carlo Option Pricing | Preston Whiteman",
-    description:
-      "A tested Python risk engine for European option pricing, Monte Carlo Greeks, convergence analysis and antithetic variance reduction.",
-    images: ["https://pestopasta74.com/projects/monte-carlo/canary-wharf.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Monte Carlo Option Pricing | Preston Whiteman",
-    description:
-      "A tested Python risk engine for European option pricing, Monte Carlo Greeks, convergence analysis and antithetic variance reduction.",
-    images: ["https://pestopasta74.com/projects/monte-carlo/canary-wharf.jpg"],
-  },
-  alternates: { canonical: "/projects/monte-carlo-option-pricing" },
 };
 
-const projectSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareSourceCode",
-  name: "Monte Carlo Option Pricing and Risk Engine",
-  description:
-    "A Python engine for European option pricing, Monte Carlo Greeks, uncertainty estimation and convergence analysis.",
-  codeRepository: "https://github.com/pestopasta74/monte-carlo-risk-engine",
-  programmingLanguage: "Python",
-  author: {
-    "@type": "Person",
-    name: "Preston Whiteman",
-    url: "https://pestopasta74.com",
+const benchmarkParameters = [
+  ["Spot price", "100"],
+  ["Strike", "100"],
+  ["Risk-free rate", "5%"],
+  ["Volatility", "20%"],
+  ["Maturity", "1 year"],
+  ["Evaluation budget", "600,000"],
+];
+
+const results = [
+  {
+    option: "Call",
+    standardError: "0.019017",
+    antitheticError: "0.013460",
+    errorReduction: "1.413×",
+    varianceReduction: "1.996×",
   },
-};
+  {
+    option: "Put",
+    standardError: "0.011188",
+    antitheticError: "0.008564",
+    errorReduction: "1.306×",
+    varianceReduction: "1.707×",
+  },
+];
+
+const greekConvergence = [
+  {
+    greek: "Call Delta",
+    pathsStart: "2,000",
+    pathsEnd: "600,000",
+    errorStart: "0.012819",
+    errorEnd: "0.000744",
+    reduction: "17.23×",
+  },
+  {
+    greek: "Gamma",
+    pathsStart: "2,000",
+    pathsEnd: "600,000",
+    errorStart: "0.002504",
+    errorEnd: "0.000139",
+    reduction: "18.01×",
+  },
+  {
+    greek: "Call Vega",
+    pathsStart: "2,000",
+    pathsEnd: "600,000",
+    errorStart: "1.600593",
+    errorEnd: "0.097863",
+    reduction: "16.36×",
+  },
+];
 
 export default function MonteCarloOptionPricingPage() {
   return (
     <>
-      <a className="skip-link" href="#case-study-content">
-        Skip to content
-      </a>
 
-      <header className="case-study-header">
-        <Link className="wordmark" href="/" aria-label="Preston Whiteman, home">
-          PW<span className="wordmark-dot">.</span>
-        </Link>
-        <Link className="case-study-back" href="/#work">
-          ← Selected work
-        </Link>
-      </header>
 
-      <main id="case-study-content">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
-        />
+
+
+      <main tabIndex={-1} id="main-content">
         <section className="case-study-hero" aria-labelledby="case-study-title">
           <div className="case-study-index">
-            <span>02 / Quantitative finance</span>
+            <span>01 / Independent project</span>
             <span className="status status-active">Active</span>
           </div>
           <div className="case-study-title-block">
             <p className="kicker">Numerical methods · Python · 2026</p>
-            <h1 id="case-study-title">Monte Carlo risk, made measurable.</h1>
+            <h1 id="case-study-title">Monte Carlo Option Pricing & Risk Engine.</h1>
             <p>
               A numerical-finance engine that prices European calls and puts,
               validates simulation against Black–Scholes and estimates price and Greek
@@ -86,120 +97,15 @@ export default function MonteCarloOptionPricingPage() {
                 Examine results <span aria-hidden="true">↓</span>
               </a>
             </div>
-            <div className="case-study-signal" aria-label="Project summary">
-              <div><strong>2×</strong><span>less noisy call estimates</span></div>
-              <div><strong>600k</strong><span>simulated market outcomes</span></div>
-              <div><strong>95%</strong><span>uncertainty ranges reported</span></div>
-            </div>
           </div>
         </section>
 
-        <section className="plain-english" aria-labelledby="plain-english-title" data-reveal>
-          <p className="section-index">In plain English</p>
-          <div>
-            <h2 id="plain-english-title">What does this engine actually do?</h2>
-            <p className="plain-english-intro">
-              An option is a contract whose value depends on what an asset might be worth
-              in the future. Because that future price is uncertain, the engine simulates
-              thousands of plausible market outcomes, calculates the contract&apos;s payoff in
-              each one and averages the results into an estimated fair value.
-            </p>
-            <div className="explainer-grid">
-              <article>
-                <span>01</span>
-                <h3>Monte Carlo simulation</h3>
-                <p>
-                  A way to study uncertainty by running the same model many times with
-                  different random market movements—like repeating an experiment under
-                  thousands of plausible futures.
-                </p>
-              </article>
-              <article>
-                <span>02</span>
-                <h3>Black–Scholes benchmark</h3>
-                <p>
-                  A recognised analytical pricing formula. Comparing the simulation with
-                  this known answer checks that the engine is producing credible results.
-                </p>
-              </article>
-              <article>
-                <span>03</span>
-                <h3>Greeks</h3>
-                <p>
-                  Risk measures that show how an option&apos;s value responds when the market
-                  changes—for example, when the asset price or expected volatility moves.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section className="case-study-summary" aria-labelledby="problem-title" data-reveal>
-          <p className="section-index">01 / The question</p>
-          <div>
-            <h2 id="problem-title">
-              How closely can simulation recover analytical prices and sensitivities,
-              and how honestly can it report the remaining uncertainty?
-            </h2>
-            <div className="case-study-prose">
-              <p>
-                The project begins with risk-neutral geometric Brownian motion and the
-                closed-form Black–Scholes solution. Those analytical prices provide a
-                benchmark for standard and antithetic Monte Carlo estimators.
-              </p>
-              <p>
-                Rather than reporting a single simulated price, the engine exposes
-                standard errors and 95% confidence intervals. Tests cover analytical
-                benchmarks, put–call parity, finite-difference Greek validation and the
-                statistical treatment of independent antithetic pair averages.
-              </p>
-              <p>
-                The latest study extends that validation to pathwise Delta and Vega and
-                a common-random-number Gamma estimator, tracking all three from 2,000 to
-                600,000 simulated paths.
-              </p>
-              <p>
-                In practical terms, this tests more than whether the code returns a
-                number. It checks whether that number is accurate, whether its uncertainty
-                is measured honestly and whether the method becomes more reliable as more
-                computation is used.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="case-study-method" aria-labelledby="method-title" data-reveal>
-          <div className="case-study-method-heading">
-            <p className="section-index">02 / Method</p>
-            <h2 id="method-title">One model. Prices, sensitivities and uncertainty.</h2>
-          </div>
-          <div className="method-grid">
-            <article>
-              <span>01</span>
-              <h3>Analytical benchmark</h3>
-              <p>Black–Scholes call and put prices establish the deterministic reference.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Standard simulation</h3>
-              <p>Exact terminal GBM samples produce discounted payoff observations.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Antithetic estimator</h3>
-              <p>Each normal draw is paired with its negative before payoffs are averaged.</p>
-            </article>
-            <article>
-              <span>04</span>
-              <h3>Monte Carlo Greeks</h3>
-              <p>Pathwise and common-random-number estimators measure Delta, Vega and Gamma.</p>
-            </article>
-          </div>
-        </section>
-
+        <section className="case-brief" aria-label="Project at a glance"><div><strong>The question</strong><p>Can I measure and reduce simulation uncertainty at a fair evaluation budget?</p></div><div><strong>My approach</strong><p>Exact terminal GBM sampling, analytical benchmarks, independent pair averages and reproducible convergence studies.</p></div><div><strong>The recorded result</strong><p>1.996× call variance reduction at 600,000 evaluations. Model assumptions and sampling limits remain explicit.</p></div></section>
+        <nav className="case-index" aria-label="Case study sections"><a href="#decisions">Modelling decisions</a><a href="#results">Recorded results</a><a href="#validation">Validation &amp; limits</a><Link href="/#option-lab">Try the model ↗</Link></nav>
+        <section className="technical-notes" id="decisions"><div className="technical-heading"><p className="section-index">01 / Modelling decisions</p><h2>A price is only the start. <em>How do I know it’s useful?</em></h2><p>I started this project to connect my interest in theoretical physics with quantitative finance. The useful part was moving beyond a single plausible number: checking the model, measuring uncertainty and finding out what changes when the estimator changes.</p></div><div className="decision-list"><article><span>01 / THE MODEL</span><div><h3>Simulate the terminal price exactly.</h3><p>For a European option under geometric Brownian motion, only the expiry price determines the payoff. I use the exact terminal GBM solution, rather than time-stepping a whole path. This avoids time-discretisation error for this payoff and keeps the experiment focused on sampling uncertainty.</p><p className="math-line">S<sub>T</sub> = S<sub>0</sub> exp[(r − σ²/2)T + σ√T Z], &nbsp; Z ∼ N(0,1)</p><p>Discount the call or put payoff at the risk-free rate, average the observations, then report the sample standard error and an approximate 95% confidence interval.</p></div></article><article><span>02 / THE COMPARISON</span><div><h3>Spend the same budget on both estimators.</h3><p>Antithetic sampling pairs each Gaussian draw Z with −Z. A comparison of N ordinary draws against N pairs would give the antithetic method twice as many terminal-price evaluations. Instead, I compare N standard observations with N/2 pairs: equal work at the level of terminal-price evaluations.</p><p>The two payoffs inside each pair are correlated. I average them first and calculate uncertainty across the independent pair averages. Treating both halves as independent would give the wrong standard error.</p></div></article><article><span>03 / THE SENSITIVITIES</span><div><h3>Different Greeks need different estimators.</h3><p>Delta and Vega use pathwise derivatives of the exact GBM solution. Gamma uses a central finite difference, with the same Gaussian draws reused at the upward, central and downward spot prices. Common random numbers reduce the noise in the difference; the bump size still introduces a numerical trade-off.</p><p>The analytical implementation covers Delta, Gamma, Vega, Theta and Rho. Each is independently checked using central finite differences of the Black–Scholes pricing functions.</p></div></article></div></section>
         <section className="case-study-results" id="results" aria-labelledby="results-title">
           <div className="case-study-results-heading">
-            <p className="section-index">03 / Results</p>
+            <p className="section-index">02 / Recorded results</p>
             <h2 id="results-title">Lower variance at the same evaluation budget.</h2>
             <p>
               Standard and antithetic estimators use equal numbers of terminal-price
@@ -217,7 +123,7 @@ export default function MonteCarloOptionPricingPage() {
             ))}
           </div>
 
-          <div className="result-table-wrapper">
+          <div className="result-table-wrapper" tabIndex={0} role="region" aria-label="Scrollable numerical results">
             <table>
               <caption className="visually-hidden">
                 Standard and antithetic Monte Carlo error comparison
@@ -245,15 +151,7 @@ export default function MonteCarloOptionPricingPage() {
             </table>
           </div>
 
-          <p className="results-translation">
-            <strong>What this means:</strong> both methods use the same computational
-            budget, but pairing each simulated market move with its opposite produces a
-            more stable answer. For calls, the remaining statistical variance is almost
-            halved—so the engine extracts roughly twice as much information from the same
-            number of simulated outcomes.
-          </p>
-
-          <figure className="case-study-figure" data-reveal>
+          <figure className="case-study-figure">
             <Image
               src="/projects/monte-carlo/variance-reduction-convergence.png"
               alt="Call and put price estimates from standard and antithetic Monte Carlo converging towards Black-Scholes prices"
@@ -267,7 +165,7 @@ export default function MonteCarloOptionPricingPage() {
             </figcaption>
           </figure>
 
-          <figure className="case-study-figure" data-reveal>
+          <figure className="case-study-figure">
             <Image
               src="/projects/monte-carlo/variance-reduction-standard-error.png"
               alt="Log-log comparison showing lower standard errors for antithetic call and put estimators"
@@ -281,7 +179,7 @@ export default function MonteCarloOptionPricingPage() {
           </figure>
 
           <div className="greeks-study" aria-labelledby="greeks-title">
-            <p className="section-index">04 / Greeks convergence</p>
+            <p className="section-index">03 / Greek convergence</p>
             <div className="greeks-study-heading">
               <h2 id="greeks-title">Sensitivity estimates converge with measured uncertainty.</h2>
               <p>
@@ -290,7 +188,7 @@ export default function MonteCarloOptionPricingPage() {
                 lies inside the reported 95% confidence interval for each studied Greek.
               </p>
             </div>
-            <div className="result-table-wrapper">
+            <div className="result-table-wrapper" tabIndex={0} role="region" aria-label="Scrollable numerical results">
               <table>
                 <caption className="visually-hidden">
                   Monte Carlo Greek standard-error convergence from 2,000 to 600,000 paths
@@ -319,126 +217,18 @@ export default function MonteCarloOptionPricingPage() {
                 </tbody>
               </table>
             </div>
-
-            <figure className="case-study-figure" data-reveal>
-              <Image
-                src="/projects/monte-carlo/greeks-convergence.png"
-                alt="Monte Carlo call and put Delta, Gamma and Vega estimates with 95% confidence intervals converging towards their Black-Scholes benchmarks"
-                width={3000}
-                height={1600}
-              />
-              <figcaption>
-                Delta, Gamma and Vega estimates converge towards their analytical
-                Black–Scholes values. Error bars show the Monte Carlo 95% confidence
-                interval at each simulation count.
-              </figcaption>
-            </figure>
-
-            <figure className="case-study-figure" data-reveal>
-              <Image
-                src="/projects/monte-carlo/greeks-standard-error.png"
-                alt="Log-log plots of Delta, Gamma and Vega estimator standard errors following the expected inverse square-root simulation scaling"
-                width={3000}
-                height={1000}
-              />
-              <figcaption>
-                The estimator standard errors track the N⁻¹ᐟ² reference slope, providing
-                an empirical check of the expected Monte Carlo convergence rate.
-              </figcaption>
-            </figure>
-
+            <div className="research-figures"><figure className="case-study-figure"><Image src="/projects/monte-carlo/greeks-convergence.png" alt="Recorded call and put Delta, Gamma and Vega estimates and confidence intervals converging towards analytical benchmarks" width={3000} height={1600} /><figcaption>Actual project output: call and put Greek estimates across the recorded simulation budgets, with 95% confidence intervals.</figcaption></figure><figure className="case-study-figure"><Image src="/projects/monte-carlo/greeks-standard-error.png" alt="Recorded Greek estimator standard errors compared with the theoretical inverse square root sample-size slope" width={3000} height={1000} /><figcaption>A 300-fold increase in sample count predicts a √300 ≈ 17.32-fold reduction in standard error. The measured reductions are close to that rate.</figcaption></figure></div><p className="greeks-note"><a href="/projects/monte-carlo/greeks-convergence.png" target="_blank" rel="noreferrer">Open the Greek convergence figure at full size ↗</a> · <a href="/projects/monte-carlo/greeks-standard-error.png" target="_blank" rel="noreferrer">Open the standard-error figure ↗</a></p><a className="data-download" href="/projects/monte-carlo/greeks-convergence.csv" download>Download the recorded Greek convergence data (.csv) ↓</a>
             <p className="greeks-note">
-              <strong>Why this matters:</strong> a risk figure without uncertainty can look
-              more precise than it really is. These confidence intervals show the range
-              of values supported by the simulation, while the convergence study checks
-              that this range narrows predictably as more paths are added. The underlying
-              data is exported to CSV so the result can be inspected and reproduced.
+              The study exports its convergence data to CSV, making the numerical results
+              inspectable and reproducible outside the plotting workflow.
             </p>
-            <a
-              className="greeks-data-link"
-              href="/projects/monte-carlo/greeks-convergence.csv"
-              download
-            >
-              Download study data <span aria-hidden="true">↓</span>
-            </a>
           </div>
         </section>
 
-        <section className="case-study-impact" aria-labelledby="impact-title" data-reveal>
-          <p className="section-index">05 / Impact</p>
-          <div>
-            <h2 id="impact-title">Why this project matters beyond the model.</h2>
-            <p className="impact-intro">
-              Financial models influence decisions only when their outputs can be trusted.
-              This project moves from simply producing a price to showing how accurate it
-              is, how sensitive it is to changing markets and how efficiently that evidence
-              can be generated.
-            </p>
-            <div className="impact-grid">
-              <article>
-                <strong>01</strong>
-                <h3>More confidence per computation</h3>
-                <p>
-                  Antithetic sampling nearly halves call-price variance without increasing
-                  the number of simulated market outcomes. The same computational budget
-                  therefore produces a more stable estimate.
-                </p>
-              </article>
-              <article>
-                <strong>02</strong>
-                <h3>Risk that can be interpreted</h3>
-                <p>
-                  Delta, Gamma and Vega translate a single option price into an explanation
-                  of how exposure changes when price and volatility move—information that
-                  is closer to an actual risk decision.
-                </p>
-              </article>
-              <article>
-                <strong>03</strong>
-                <h3>Evidence instead of false precision</h3>
-                <p>
-                  Confidence intervals, analytical benchmarks and convergence tests make
-                  uncertainty visible. A reviewer can see not only the answer, but also why
-                  it should be believed and where its limitations remain.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section className="case-study-engineering" aria-labelledby="engineering-title" data-reveal>
-          <p className="section-index">06 / Engineering</p>
+        <section className="case-study-engineering" aria-labelledby="engineering-title">
+          <p className="section-index">04 / Engineering</p>
           <div>
             <h2 id="engineering-title">Designed as a reproducible numerical system.</h2>
-            <p className="engineering-intro">
-              The project demonstrates the full workflow behind trustworthy quantitative
-              software: derive a method, implement it, compare it with an independent
-              benchmark, quantify error and automate the checks so future changes cannot
-              silently break the result.
-            </p>
-            <figure className="editorial-photo editorial-photo-contained">
-              <Image
-                src="/projects/monte-carlo/data-analysis-workstation.jpg"
-                alt="A laptop displaying source code and analytical charts during a software-development workflow"
-                width={2400}
-                height={1597}
-                sizes="(max-width: 900px) 100vw, 75vw"
-              />
-              <figcaption>
-                Numerical research becomes useful when the analysis is implemented,
-                tested and made reproducible.
-                <span>
-                  Photo: {" "}
-                  <a
-                    href="https://unsplash.com/photos/laptop-screen-displaying-code-and-data-charts-GQOylIn892U"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Daniil Komov / Unsplash
-                  </a>
-                </span>
-              </figcaption>
-            </figure>
             <ul>
               <li>Black–Scholes calls, puts and five analytical Greeks</li>
               <li>Standard and antithetic Monte Carlo estimators</li>
@@ -452,14 +242,16 @@ export default function MonteCarloOptionPricingPage() {
           </div>
         </section>
 
-        <section className="case-study-next" aria-labelledby="next-title" data-reveal>
-          <p className="section-index">07 / Next</p>
+        <section className="technical-notes validation-notes" id="validation"><div className="technical-heading"><p className="section-index">05 / Validation &amp; limits</p><h2>Validation, before <em>interpretation.</em></h2></div><div className="validation-grid"><article><h3>Analytical consistency</h3><p>Known Black–Scholes prices, independently finite-differenced Greeks and put–call parity provide checks that do not rely on one simulation looking plausible.</p></article><article><h3>Statistical consistency</h3><p>Price and Greek estimates include standard errors and confidence intervals. Convergence studies test the expected N⁻¹ᐟ² error rate, and antithetic comparisons use equal evaluation budgets.</p></article><article><h3>Engineering consistency</h3><p>Separate model, pricing and comparison modules; immutable parameter objects; fixed seeds for reproducible studies; pytest and Ruff checks through GitHub Actions. Recorded CSV output lets someone inspect the experiment beyond a screenshot.</p></article></div><div className="limits-note"><h3>What these results do—and don’t—establish</h3><p>This is a numerical-methods project for European options under constant-volatility GBM. Agreement with Black–Scholes validates the implementation within those assumptions; it does not validate GBM against market data. The confidence intervals describe sampling uncertainty, not model risk or Gamma’s finite-difference bias.</p><p>A 95% interval can miss the analytical answer in an individual run. In the recorded experiment, call Vega at 2,000 paths does so. At 600,000 paths, all six studied call/put Greek benchmarks are inside their reported intervals. Increasing the sample count reduces typical sampling error; the realised pricing error need not improve at every step.</p><p>Value at Risk, Expected Shortfall, historical backtesting and additional stochastic models are future directions, rather than capabilities claimed by this version.</p></div><div className="reproduce-note"><h3>Follow the evidence</h3><p><a href="https://github.com/pestopasta74/monte-carlo-risk-engine/blob/main/src/quantmc/pricing/monte_carlo_greeks.py" target="_blank" rel="noreferrer">Read the Greek estimators ↗</a> · <a href="https://github.com/pestopasta74/monte-carlo-risk-engine/tree/main/tests" target="_blank" rel="noreferrer">Inspect the tests ↗</a> · <a href="https://github.com/pestopasta74/monte-carlo-risk-engine/blob/main/examples/greeks_convergence_analysis.py" target="_blank" rel="noreferrer">Reproduce the convergence study ↗</a></p></div></section>
+        <section className="case-study-next" aria-labelledby="next-title">
+          <p className="section-index">06 / Explore</p>
           <div>
             <h2 id="next-title">From research engine to interactive proof of concept.</h2>
             <p>
-              The next version will expose the analysis through this website, allowing a
-              visitor to change option parameters and compare prices, confidence intervals
-              and Greeks without installing the Python package.
+              A browser demonstration on the homepage lets you change volatility and sample
+              count, switch between calls and puts, and compare simulated prices and
+              confidence intervals with Black–Scholes. The Python repository contains
+              the full Greek estimators and variance-reduction analysis.
             </p>
             <a
               className="button button-primary"
@@ -473,13 +265,7 @@ export default function MonteCarloOptionPricingPage() {
         </section>
       </main>
 
-      <footer>
-        <Link className="wordmark" href="/">
-          PW<span className="wordmark-dot">.</span>
-        </Link>
-        <p>Monte Carlo option pricing · 2026</p>
-        <Link href="/#work">Selected work ↑</Link>
-      </footer>
+
     </>
   );
 }

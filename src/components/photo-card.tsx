@@ -1,0 +1,3 @@
+import Image from "next/image";
+import { photos } from "@/data/photos";
+export default function PhotoCard({slug, className=""}: {slug:string;className?:string}) { const photo=photos.find(item=>item.slug===slug)!; return <figure className={`photo-card ${className}`}><a href={photo.src} target="_blank" rel="noreferrer" aria-label={`Open full photograph: ${photo.caption} (new tab)`}><Image src={photo.src} width={photo.width} height={photo.height} alt={photo.alt} sizes="(max-width: 700px) 90vw, 45vw" /></a><figcaption><strong>{photo.caption}</strong><span>{photo.note}</span></figcaption></figure>; }

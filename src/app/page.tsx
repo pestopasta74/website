@@ -1,221 +1,44 @@
+import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/data/projects";
+import PhotoCard from "@/components/photo-card";
+import OptionLab from "@/components/option-lab";
+
+const Arrow = () => <span aria-hidden="true">↗</span>;
 
 export default function Home() {
-  return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Preston Whiteman, home">
-          PW<span className="wordmark-dot">.</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+  return <div className="portfolio-home"><main tabIndex={-1} id="main-content">
+    <section className="intro-section" id="top">
+      <div className="intro-topline"><span>Mathematics &amp; Physics · University of Bath</span><span>Graduating 2029</span></div>
+      <div className="intro-grid">
+        <div className="intro-copy">
+          <p className="small-label">Hello, I’m</p>
+          <h1>Preston Whiteman<span className="name-stop">.</span></h1>
+          <p className="intro-focus">Exploring quantitative finance through mathematics and code.</p>
+          <p className="intro-description">I’m a first-year Mathematics and Physics student at Bath. I build models to understand how they work, how to test them, and where their answers stop being useful. Here you’ll find my option-pricing project, research internship and the people-facing work alongside them.</p>
+          <div className="intro-links"><Link className="solid-link" href="/projects/monte-carlo-option-pricing">Explore the pricing project <Arrow /></Link><a className="text-link" href="#work">See selected work <span aria-hidden="true">↓</span></a></div>
+        </div>
+        <div className="hero-photographs"><figure className="hero-portrait"><Image src="/photos/preston-headshot-2026.jpg" width={1750} height={1167} alt="Preston Whiteman in a white shirt" priority sizes="(max-width: 700px) 85vw, 400px" /><figcaption>Bath, 2026</figcaption></figure></div>
+      </div>
+      <div className="intro-bottom"><p><strong>BSc Mathematics and Physics</strong><span>University of Bath · First year</span></p><p><strong>Theoretical physics &amp; quantitative finance</strong><span>Probability, numerical methods and scientific computing</span></p><a href="#contact">Open to insight programmes &amp; technical opportunities <Arrow /></a></div>
+    </section>
 
-      <main id="main-content">
-        <section className="hero" id="top" aria-labelledby="hero-title">
-          <div className="hero-index" aria-hidden="true">
-            <span>51.38° N</span><span>Bath, UK</span>
-          </div>
-          <div className="hero-copy">
-            <p className="kicker">Physics with Theoretical Physics · University of Bath</p>
-            <h1 id="hero-title">Preston Whiteman</h1>
-            <p className="hero-statement">
-              I turn complex systems into clear, testable tools, combining mathematical
-              modelling, computation and disciplined investigation.
-            </p>
-          </div>
-          <div className="hero-footer">
-            <p>Physics student building evidence-led systems for quantitative finance, research and technology.</p>
-            <div className="hero-actions" aria-label="Profile links">
-              <a className="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
-              <a className="button button-secondary" href="https://github.com/pestopasta74" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-              <a className="button button-secondary" href="https://www.linkedin.com/in/pestopasta74/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        </section>
+    <section className="selected-work section-wrap" id="work" aria-labelledby="work-title">
+      <div className="editorial-heading"><div><p className="small-label">01 / Selected work</p><h2 id="work-title">Two problems I’ve worked on.</h2></div><p>One is about measuring uncertainty in a model. The other is about helping colleagues work with evidence.</p></div>
+      <article className="flagship-project">
+        <div className="flagship-copy"><div className="project-meta"><span>Independent project · Python</span><span className="project-state">Ongoing</span></div><h3>Monte Carlo option pricing</h3><p className="project-question">How much should I trust a simulated option price?</p><p>I built a Python engine for European calls and puts, checked it against Black–Scholes, then studied the uncertainty in both prices and Greeks. The key comparison: can antithetic sampling reduce noise with the same number of terminal-price evaluations?</p><div className="project-evidence"><div><strong>600,000</strong><span>evaluations in the recorded benchmark</span></div><div><strong>1.996×</strong><span>call variance-reduction factor</span></div><div><strong>59</strong><span>automated tests in the repository</span></div></div><p className="evidence-note">Constant-volatility GBM; a numerical-methods study. These results do not establish performance against market data.</p><div className="work-actions"><Link className="solid-link" href="/projects/monte-carlo-option-pricing">Decisions, results &amp; limits <Arrow /></Link><a className="text-link" href="https://github.com/pestopasta74/monte-carlo-risk-engine" target="_blank" rel="noreferrer">Inspect the source <Arrow /></a></div></div>
+        <figure className="flagship-visual"><div className="figure-label">Recorded project output · standard error</div><Image src="/projects/monte-carlo/variance-reduction-standard-error.png" alt="Recorded call and put standard errors across increasing simulation budgets, comparing standard and antithetic Monte Carlo" width={1800} height={1200} className="real-project-figure" sizes="(max-width: 900px) 90vw, 550px"/><figcaption>Antithetic sampling lowered the standard error in the recorded call and put experiments. The case study explains the equal-budget comparison and how the uncertainty is calculated.</figcaption><Link href="/projects/monte-carlo-option-pricing#results">Examine the recorded results <Arrow /></Link></figure>
+      </article>
+      <article className="supporting-project">
+        <div className="supporting-copy"><p className="project-meta">Bath Insights internship · June–July 2026</p><h3>Making research-impact evidence easier to review.</h3><p>I worked with another intern on evidence for approximately four REF2029 case studies. I developed a Python workflow with a locally hosted language model, structured Excel exports and an internal interface, then refined it with feedback from colleagues.</p><dl className="internship-evidence"><div><dt>The scale</dt><dd>50+ research outputs; 200+ evidence items reviewed a day during the internship.</dd></div><div><dt>My focus</dt><dd>Classification, reviewable outputs, the interface and documentation for handover.</dd></div></dl><Link className="text-link" href="/projects/research-impact">Read the workflow &amp; my contribution <Arrow /></Link></div>
+        <PhotoCard slug="internship-portrait"/>
+      </article>
+    </section>
 
-        <section className="work-section" id="work" aria-labelledby="work-title">
-          <div className="section-heading">
-            <p className="section-index">01 / Selected work</p>
-            <h2 id="work-title">Work with measurable intent.</h2>
-            <p>Projects that turn uncertainty into insight, and insight into working systems.</p>
-          </div>
-          <div className="work-grid">
-            {projects.map((project) => (
-              <article className="project-card" key={project.number} data-reveal>
-                <div className="project-topline"><span>{project.number}</span><span>{project.eyebrow}</span><span className={`status status-${project.status}`}>{project.status.replace("-", " ")}</span></div>
-                <figure className="project-image">
-                  <Image
-                    src={project.image.src}
-                    alt={project.image.alt}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 33vw"
-                    style={{ objectPosition: project.image.position }}
-                  />
-                  {project.links
-                    .filter((link) => link.kind === "case-study")
-                    .map((link) => (
-                      <a
-                        className="project-image-case-link"
-                        href={link.href}
-                        key={link.href}
-                        aria-label={`Read the ${project.title} case study`}
-                      />
-                    ))}
-                  <figcaption>
-                    <a href={project.image.creditUrl} target="_blank" rel="noreferrer">
-                      {project.image.credit}
-                    </a>
-                  </figcaption>
-                </figure>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="project-impact">
-                  <span>Impact</span>
-                  <p>{project.impact}</p>
-                </div>
-                <ul aria-label="Project themes">
-                  {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-                </ul>
-                <div className="project-links">
-                  {project.links.length > 0 ? project.links.map((link) => (
-                    <a
-                      href={link.href}
-                      key={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                    >
-                      {link.label} <span aria-hidden="true">{link.href.startsWith("http") ? "↗" : "→"}</span>
-                    </a>
-                  )) : <span>Online demonstration coming soon</span>}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+    <section id="option-lab" className="interactive-section section-wrap" aria-labelledby="lab-title"><div className="editorial-heading"><div><p className="small-label">02 / Try an experiment</p><h2 id="lab-title">Change the assumptions. Watch the estimate.</h2></div><p>Adjust volatility or the simulation budget. Compare the estimate and its uncertainty with the analytical price.</p></div><OptionLab /><div className="section-end-link"><Link className="text-link" href="/projects/monte-carlo-option-pricing#validation">How I validate the Python implementation <Arrow /></Link></div></section>
 
-        <section className="about-section" id="about" aria-labelledby="about-title" data-reveal>
-          <p className="section-index">02 / About</p>
-          <div className="about-layout">
-            <h2 id="about-title">
-              I make difficult ideas useful, measurable and ready to act on.
-            </h2>
-            <div className="about-copy">
-              <p>
-                I&apos;m studying BSc Physics with Theoretical Physics with Professional
-                Placement at the University of Bath, where mathematical theory meets
-                scientific computing, modelling and experimental work.
-              </p>
-              <p>
-                Across quantitative modelling, research impact analysis and interdisciplinary
-                engineering, I focus on the same outcome: a clearer decision, backed by a
-                system that can be tested and trusted.
-              </p>
-              <p>
-                I bring careful measurement, applied statistics and technical communication
-                to problems in finance, technology and research. My placement goal is to
-                contribute where rigorous analysis can create practical momentum.
-              </p>
-              <dl className="about-facts">
-                <div><dt>Based</dt><dd>Bath, United Kingdom</dd></div>
-                <div><dt>Degree</dt><dd>BSc Physics with Theoretical Physics with Professional Placement</dd></div>
-                <div><dt>Focus</dt><dd>Quantitative analysis · Technology · Research</dd></div>
-              </dl>
-            </div>
-          </div>
-        </section>
+    <section className="about-editorial section-wrap" id="about"><div className="editorial-heading"><div><p className="small-label">03 / A little context</p><h2>Why Mathematics and Physics?</h2></div><p>The degree brings my interests in theoretical physics and quantitative finance closer together.</p></div><div className="about-layout"><div className="about-editorial-copy"><p>After first-year study in Physics, I moved to Mathematics and Physics. I wanted to spend more time on the mathematical ideas behind the physical models, while exploring how the same tools are used in finance.</p><p>The Monte Carlo project gives me something concrete to question beyond a problem sheet. I also recently completed the initial round of the International Youth Math Challenge, receiving a commendation for my submission.</p><p>Alongside the course, I’m an AI team programmer and EDI Lead in Team Bath Racing Electric, and the elected Mathematics and Physics Academic Representative and a SUmmit member for 2026/27.</p><div className="context-links"><Link className="text-link" href="/journey">Experience &amp; timeline <Arrow /></Link><Link className="text-link" href="/life">More about me <Arrow /></Link></div></div><aside className="academic-results"><p className="small-label">Selected results</p><p className="results-context">From my previous Physics study</p><div><strong>90%</strong><span>Experimental-physics research report</span></div><div><strong>82%</strong><span>Scientific-computing project &amp; report</span></div><p className="results-context">These are individual assessment results, rather than a degree average.</p></aside></div></section>
 
-        <section className="spotlight-section" aria-labelledby="spotlight-title" data-reveal>
-          <div className="spotlight-label">
-            <p className="section-index">Research spotlight / 2026</p>
-            <span>University of Bath</span>
-          </div>
-          <div className="spotlight-main">
-            <p className="spotlight-role">Research &amp; Impact Intern · Bath Insights</p>
-            <h2 id="spotlight-title">Making research impact visible.</h2>
-            <p className="spotlight-intro">
-              Built a focused evidence workflow for the University&apos;s research-impact work
-              across policy, health and environmental domains, making scattered signals easier
-              to find, structure and review.
-            </p>
-            <div className="spotlight-metrics" aria-label="Internship highlights">
-              <div><strong>50+</strong><span>research outputs analysed</span></div>
-              <div><strong>04</strong><span>evidence and research platforms</span></div>
-              <div><strong>08</strong><span>weeks of full-time research</span></div>
-            </div>
-            <div className="spotlight-tools">
-              <span>Python</span><span>PURE</span><span>Altmetric</span><span>PlumX</span><span>Overton</span><span>Local LLMs</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="experience-section" id="experience" aria-labelledby="experience-title" data-reveal>
-          <div className="section-heading light-heading">
-            <p className="section-index">03 / Experience</p>
-            <h2 id="experience-title">Built for the real world.</h2>
-            <p>Technical work becomes valuable when teams can understand it, use it and move forward with it.</p>
-          </div>
-          <div className="timeline">
-            <article>
-              <time>2026 to present</time>
-              <div><p>University of Bath</p><h3>Smart Prosthetic Arm · Vertically Integrated Project</h3></div>
-              <p>Building collaborative software, web infrastructure and technical documentation for an interdisciplinary assistive-technology team.</p>
-            </article>
-            <article>
-              <time>2025 to 2026</time>
-              <div><p>Team Bath Racing Electric</p><h3>Autonomous Systems</h3></div>
-              <p>Contributed to control and motion-planning work in a multidisciplinary Formula Student engineering environment.</p>
-            </article>
-            <article>
-              <time>2026 to present</time>
-              <div><p>University of Bath</p><h3>Student Outreach Ambassador</h3></div>
-              <p>Representing the university and making complex choices clearer for prospective students and families.</p>
-            </article>
-            <article>
-              <time>2023 to 2024</time>
-              <div><p>EDT &amp; GE Vernova</p><h3>Industrial Cadets Gold · Project Team Leader</h3></div>
-              <p>Led a year-long engineering design project from evaluation to a formal presentation for industry stakeholders.</p>
-            </article>
-          </div>
-        </section>
-
-        <section className="recognition-section" aria-labelledby="recognition-title" data-reveal>
-          <div className="recognition-copy">
-            <p className="section-index">04 / Recognition</p>
-            <h2 id="recognition-title">Proof of curiosity.</h2>
-          </div>
-          <div className="recognition-grid">
-            <article><span>01</span><strong>British Physics Olympiad</strong><p>Gold Award · top approximately 5% nationally</p></article>
-            <article><span>02</span><strong>Industrial Cadets</strong><p>Gold Award · engineering project with GE Vernova</p></article>
-            <article><span>03</span><strong>Laboratory work</strong><p>90% · Electrical Properties of a Tungsten Filament Lamp</p></article>
-            <article><span>04</span><strong>Health Strategy Competition</strong><p>1st place · team leadership and resource allocation</p></article>
-          </div>
-        </section>
-
-        <section className="contact-section" id="contact" aria-labelledby="contact-title" data-reveal>
-          <p className="section-index">05 / Contact</p>
-          <div>
-            <h2 id="contact-title">Let&apos;s solve something difficult.</h2>
-            <p>I&apos;m looking for a placement where quantitative thinking, technical craft and clear communication can create useful change.</p>
-            <div className="contact-links">
-              <a href="https://www.linkedin.com/in/pestopasta74/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-              <a href="https://github.com/pestopasta74" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-              <span>Public CV coming shortly</span>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer>
-        <a className="wordmark" href="#top" aria-label="Back to top">PW<span className="wordmark-dot">.</span></a>
-        <p>Preston Whiteman · Bath, UK</p>
-        <a href="#top">Back to top ↑</a>
-      </footer>
-    </>
-  );
+    <section className="home-photo-strip section-wrap" aria-labelledby="frames-title"><div className="photo-strip-heading"><div><p className="small-label">University, beyond the projects</p><h2 id="frames-title">Teams, conversations &amp; a cow costume.</h2></div><Link className="text-link" href="/photos">Photo notebook <Arrow /></Link></div><div><PhotoCard slug="ubs"/><PhotoCard slug="vice-chancellor"/><PhotoCard slug="bath-half"/></div></section>
+    <section className="contact-editorial section-wrap" id="contact"><div><p className="small-label">04 / Get in touch</p><h2>Have something I could learn from or contribute to?</h2><p>I’m interested in insight programmes, internships and technical projects in quantitative finance, research or software. I’d be glad to talk about the work here.</p><a className="contact-email" href="mailto:pltsw20@bath.ac.uk">pltsw20@bath.ac.uk <Arrow /></a></div><div className="contact-side"><a href="https://www.linkedin.com/in/pestopasta74/" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="https://github.com/pestopasta74" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="#top">Back to top ↑</a></div></section>
+  </main></div>;
 }

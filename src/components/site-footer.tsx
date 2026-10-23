@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function SiteFooter() { return <footer className="shared-footer"><div><Link className="footer-name" href="/">Preston Whiteman.</Link><p>Mathematics &amp; Physics · University of Bath<br />Graduating 2029</p></div><nav aria-label="Footer navigation"><Link href="/journey">Experience &amp; timeline</Link><Link href="/life">About me</Link><Link href="/photos">Photo notebook</Link><a href="mailto:pltsw20@bath.ac.uk">Get in touch</a></nav><p>© 2026 Preston Whiteman<br /><span>Mathematics, code and university life.</span></p></footer>; }
